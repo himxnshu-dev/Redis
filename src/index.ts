@@ -1,12 +1,14 @@
-import { Redis } from "ioredis";
 import express from "express";
 import dotenv from "dotenv";
 import { Request, Response } from "express";
+import { redis } from "./redis.js";
+import { bannerRouter } from "./routes/banner.js";
 
 dotenv.config();
 
 const app = express();
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+
+app.use(express.json());
 
 app.get("/ping-redis", async (req: Request, res: Response): Promise<void> => {
     try {
@@ -20,6 +22,9 @@ app.get("/ping-redis", async (req: Request, res: Response): Promise<void> => {
         }
     }
 })
+
+// banner routes
+app.use("/api", bannerRouter());
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`)
