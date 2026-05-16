@@ -1,10 +1,10 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+import express from "express";
 import { Request, Response } from "express";
 import { redis } from "./redis.js";
 import { bannerRouter } from "./routes/banner.js";
-
-dotenv.config();
+import { otpRouter } from "./routes/otp.js";
 
 const app = express();
 
@@ -25,6 +25,8 @@ app.get("/ping-redis", async (req: Request, res: Response): Promise<void> => {
 
 // banner routes
 app.use("/api", bannerRouter());
+// otp route
+app.use("/api", otpRouter());
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`)
