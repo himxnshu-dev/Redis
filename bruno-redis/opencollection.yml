@@ -1,7 +1,7 @@
 opencollection: 1.0.0
 
 info:
-  name: redis
+  name: bruno-redis
 config:
   proxy:
     inherit: true

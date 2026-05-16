@@ -1,0 +1,19 @@
+info:
+  name: view json profile
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: http://localhost:3000/api/user/:id/json
+  params:
+    - name: id
+      value: "12345"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
