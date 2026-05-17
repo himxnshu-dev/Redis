@@ -38,7 +38,7 @@ export const userProfileRouter = (): Router => {
                 }
 
                 res.json({
-                    user: user ? JSON.parse(user) : null
+                    user: JSON.parse(user)
                 })
             } catch (error) {
                 res.status(500).json({

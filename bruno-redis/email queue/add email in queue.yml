@@ -1,0 +1,23 @@
+info:
+  name: add email in queue
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:3000/api/emails
+  body:
+    type: json
+    data: |-
+      {
+        "to": "user@example.com",
+        "subject": "test email",
+        "body": "hope you get the email bruh"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

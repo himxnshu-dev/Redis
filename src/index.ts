@@ -6,6 +6,7 @@ import { redis } from "./redis.js";
 import { bannerRouter } from "./routes/banner.js";
 import { otpRouter } from "./routes/otp.js";
 import { userProfileRouter } from "./routes/user-profile.js";
+import { emailRouter } from "./routes/emails.js";
 
 const app = express();
 
@@ -24,12 +25,11 @@ app.get("/ping-redis", async (req: Request, res: Response): Promise<void> => {
     }
 })
 
-// banner routes
+// api routes
 app.use("/api", bannerRouter());
-// otp route
 app.use("/api", otpRouter());
-// user-profile route
 app.use('/api', userProfileRouter())
+app.use("/api", emailRouter());
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`)
