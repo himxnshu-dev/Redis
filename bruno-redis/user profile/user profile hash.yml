@@ -1,0 +1,30 @@
+info:
+  name: user profile hash
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://localhost:3000/api/user/:id/hash
+  params:
+    - name: id
+      value: "123"
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "id": "123",
+        "name": "Himanshu",
+        "email": "himanshu@example.com",
+        "role": "student",
+        "isActive": true,
+        "profilePicture": "https://cdn.app.com/pfp.png"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
