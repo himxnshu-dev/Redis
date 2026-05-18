@@ -12,7 +12,8 @@ export const queueEmailsRouter = (): Router => {
             const jobData = {
                 to: req.body.to,
                 subject: req.body.subject,
-                body: req.body.body
+                body: req.body.body,
+                createdAt: new Date().toLocaleTimeString()
             }
 
             const job = await emailQueue.add(

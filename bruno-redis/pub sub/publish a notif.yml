@@ -1,0 +1,21 @@
+info:
+  name: publish a notif
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:3000/api/notification
+  body:
+    type: json
+    data: |-
+      {
+        "title": "new notification!"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
