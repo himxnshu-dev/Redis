@@ -20,7 +20,7 @@ export const otpRouter = (): Router => {
                 return;
             }
             const otp = Math.floor(100000 + Math.random() * 900000).toString(); // generate a random 6-digit OTP
-            await redis.set(otpKey(phone), otp, 'EX', 30); // set OTP with a TTL of 30 seconds
+            await redis.set(otpKey(phone), otp, 'EX', 60); // set OTP with a TTL of 60 seconds
 
             await sendOtp(`Your OTP is: ${otp}`);
 

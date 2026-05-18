@@ -1,0 +1,23 @@
+info:
+  name: bullmq email queue
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://localhost:3000/api/email/send
+  body:
+    type: json
+    data: |-
+      {
+        "to": "user@example.com",
+        "subject": "test email",
+        "body": "hope you get the email bruh"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

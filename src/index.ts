@@ -7,6 +7,7 @@ import { bannerRouter } from "./routes/banner.js";
 import { otpRouter } from "./routes/otp.js";
 import { userProfileRouter } from "./routes/user-profile.js";
 import { emailRouter } from "./routes/emails.js";
+import { queueEmailsRouter } from "./routes/emailsQ.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/api", bannerRouter());
 app.use("/api", otpRouter());
 app.use('/api', userProfileRouter())
 app.use("/api", emailRouter());
+app.use("/api", queueEmailsRouter());
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`)
