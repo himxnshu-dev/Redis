@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { redis } from "../redis.js";
+import { redis } from "../lib/redis.js";
 import { Request, Response } from "express";
 
 const enum QueueKey {

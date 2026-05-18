@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import { Request, Response } from "express";
-import { redis } from "./redis.js";
+import { redis } from "./lib/redis.js";
 import { bannerRouter } from "./routes/banner.js";
 import { otpRouter } from "./routes/otp.js";
 import { userProfileRouter } from "./routes/user-profile.js";

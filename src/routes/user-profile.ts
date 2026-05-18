@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { redis } from "../redis.js";
+import { redis } from "../lib/redis.js";
 import { Router } from "express";
 
 export const userProfileRouter = (): Router => {

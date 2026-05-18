@@ -1,7 +1,7 @@
 import {  Router } from 'express';
 import { Request, Response } from 'express';
-import { redis } from '../redis.js';
-import { sendOtp } from '../utils/sendOtp.js';
+import { redis } from '../lib/redis.js';
+import { sendOtp } from '../lib/sendOtp.js';
 
 // another use case for redis is to store an OTP for a user. This OTP can be set with an expiration time (TTL) and can be retrieved or deleted as needed.
 function otpKey(phone: string): string {

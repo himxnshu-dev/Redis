@@ -1,6 +1,6 @@
 import {  Router } from 'express';
 import { Request, Response } from 'express';
-import { redis } from '../redis.js';
+import { redis } from '../lib/redis.js';
 
 const enum Banner {
     BANNER_KEY = "app:banner"
