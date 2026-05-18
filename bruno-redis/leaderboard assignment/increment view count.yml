@@ -1,0 +1,19 @@
+info:
+  name: increment view count
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:3000/api/post/:id/view
+  params:
+    - name: id
+      value: "123456"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
