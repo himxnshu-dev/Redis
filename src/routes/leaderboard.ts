@@ -49,8 +49,31 @@ export const leaderboardRouter = (): Router => {
                 const start: number = 0
                 const stop: number = 4
                 const topScorers = await redis.zrevrange(Leaderboard.SCORE, start, stop, "WITHSCORES")
-    
-                res.status(200).json({ topScorers })
+
+                // const topPlayers: { userId: string; score: number }[] = []
+                // for (let i = 0; i < topScorers.length; i += 2) {
+                //     topPlayers.push({
+                //         userId: topScorers[i] as string,
+                //         score: Number(topScorers[i + 1])
+                //     })
+                // }
+                const formattedTopScorers = topScorers.reduce((
+                    result: { userId: string; score: number }[],
+                    value,
+                    index,
+                    array
+                ) => {
+                    if (index % 2 === 0) {
+                        result.push({
+                            userId: value,
+                            score: Number(array[index + 1])
+                        })
+                    }
+                    return result;
+                }, [])
+
+
+                res.status(200).json({ topScorers: formattedTopScorers })
             } catch (err) {
                 res.status(500).json({
                     msg: "An error occurred while fetching the leaderboard",
@@ -58,6 +81,32 @@ export const leaderboardRouter = (): Router => {
                 })
             }
         })
+
+    router.get('/leaderboard/:userId/rank', async (req: Request, res: Response) => {
+        try {
+            const { userId } = req.params;
+            if (!userId) {
+                return res.json({ msg: "invalid userId" })
+            }
+
+            const userRank = await redis.zrevrank(Leaderboard.SCORE, userId as string)
+            if (userRank === null) {
+                return res.status(404).json({
+                    msg: "user not found in leaderboard"
+                })
+            }
+
+            res.status(200).json({
+                success: true,
+                userRank: userRank + 1 // ranks are 0-indexed hence adding 1
+            })
+        } catch (err) {
+            res.status(500).json({
+                msg: "An error occurred while fetching the user rank",
+                error: err instanceof Error ? err.message : "Unknown error"
+            })
+        }
+    })
 
     return router;
 }
