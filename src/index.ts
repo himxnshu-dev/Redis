@@ -10,6 +10,7 @@ import { emailRouter } from "./routes/emails.js";
 import { queueEmailsRouter } from "./routes/emailsQ.js";
 import { publishRouter } from "./routes/pubsub.js";
 import { leaderboardRouter } from "./routes/leaderboard.js";
+import { postsRouter } from "./routes/posts.js";
 
 const app = express();
 
@@ -20,16 +21,13 @@ app.get("/ping-redis", async (req: Request, res: Response): Promise<void> => {
         const reply = await redis.ping()
         res.json({ reply: reply })
     } catch (err) {
-        if (err instanceof Error) {
-            res.status(500).json({ error: err.message });
-        } else {
-            res.status(500).json({ error: "An unknown error occurred" });
-        }
+        res.status(500).json({ error: "Error connecting to Redis" })
     }
 })
 
 // api routes
 app.use("/api", bannerRouter());
+app.use("/api", postsRouter());
 app.use("/api", otpRouter());
 app.use('/api', userProfileRouter())
 app.use("/api", emailRouter());
